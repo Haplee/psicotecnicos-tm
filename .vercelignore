@@ -1,0 +1,16 @@
+# Archivos y secretos que nunca deben subirse a Vercel
+.env
+.env.*
+*.local
+
+# Dependencias y artefactos de build (Vercel compila en su infraestructura)
+node_modules
+dist
+.vercel
+
+# Sistema y editor
+.git
+.gitignore
+*.log
+.DS_Store
+Thumbs.db
