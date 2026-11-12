@@ -8,9 +8,10 @@ import {
 } from 'lucide-react'
 import { aptitudes, getQuestionsForAptitude, memoryBrief, questionBank, type AptitudeId, type Question } from './data/questions'
 import { QuestionCard } from './components/QuestionCard'
-import { createBackup, parseBackup, readHistory, readPreferences, writeHistory, writePreferences, type ExamResult, type Preferences } from './lib/storage'
+import { NotesPage } from './components/NotesPage'
+import { createBackup, parseBackup, readHistory, readNotes, readPreferences, writeHistory, writeNotes, writePreferences, type ExamResult, type Preferences } from './lib/storage'
 
-type Page = 'dashboard' | 'training' | 'simulacros' | 'history' | 'mistakes' | 'settings' | 'results' | 'exam'
+type Page = 'dashboard' | 'training' | 'simulacros' | 'history' | 'mistakes' | 'settings' | 'results' | 'exam' | 'notes'
 type Mode = 'practice' | 'block' | 'full' | 'review'
 type Session = {
   id: string
@@ -44,6 +45,7 @@ const navItems: { id: Page; label: string; icon: typeof LayoutDashboard }[] = [
   { id: 'simulacros', label: 'Simulacros', icon: ClipboardList },
   { id: 'mistakes', label: 'Repasar errores', icon: RotateCcw },
   { id: 'history', label: 'Historial', icon: History },
+  { id: 'notes', label: 'Mis apuntes', icon: FileText },
 ]
 
 const formatTime = (seconds: number) => `${String(Math.floor(Math.max(0, seconds) / 60)).padStart(2, '0')}:${String(Math.max(0, seconds) % 60).padStart(2, '0')}`
@@ -182,7 +184,7 @@ function App() {
   }
 
   const exportBackup = () => {
-    const backup = createBackup(history, preferences)
+    const backup = createBackup(history, preferences, readNotes())
     const blob = new Blob([JSON.stringify(backup, null, 2)], { type: 'application/json' })
     const url = URL.createObjectURL(blob)
     const a = document.createElement('a')
@@ -197,9 +199,10 @@ function App() {
     if (!file) return
     try {
       const parsed = parseBackup(JSON.parse(await file.text()))
-      if (!window.confirm(`La copia contiene ${parsed.history.length} resultados. ¿Quieres sustituir tu historial y preferencias actuales?`)) return
+      if (!window.confirm(`La copia contiene ${parsed.history.length} resultados y ${parsed.notes?.length ?? 0} apuntes. ¿Quieres sustituir tu historial, preferencias y apuntes actuales?`)) return
       setHistory(parsed.history)
       setPreferences(parsed.preferences)
+      writeNotes(parsed.notes ?? [])
       setImportMessage('Copia restaurada correctamente.')
     } catch (error) {
       setImportMessage(error instanceof Error ? error.message : 'No se pudo leer el archivo.')
@@ -256,6 +259,7 @@ function App() {
         {page === 'training' && <Training selected={selectedAptitude} setSelected={setSelectedAptitude} onStart={startSession} blockMinutes={preferences.blockMinutes} />}
         {page === 'simulacros' && <MockExams onStart={startSession} blockMinutes={preferences.blockMinutes} />}
         {page === 'history' && <HistoryPage history={history} onOpen={openResult} onClear={() => { if (window.confirm('¿Eliminar todo el historial guardado en este dispositivo?')) setHistory([]) }} />}
+        {page === 'notes' && <NotesPage />}
         {page === 'mistakes' && <MistakesPage questions={failedQuestions} onStart={() => startSession('review', undefined, failedQuestions)} onTraining={(id) => startSession('review', undefined, failedQuestions.filter((question) => question.aptitudeId === id))} />}
         {page === 'settings' && <SettingsPage preferences={preferences} setPreferences={setPreferences} historyCount={history.length} onExport={exportBackup} onImport={importBackup} importMessage={importMessage} confirmReset={confirmReset} setConfirmReset={setConfirmReset} onReset={() => { setHistory([]); setPreferences({ theme: 'dark', blockMinutes: 7, memorySeconds: 45 }); setConfirmReset(false); setImportMessage('Datos locales reiniciados.') }} />}
         {page === 'results' && viewingResult && <ResultsPage result={viewingResult} onBack={() => go('history')} onPrint={() => window.print()} onRetry={() => startSession(viewingResult.mode === 'full' ? 'full' : viewingResult.mode === 'block' ? 'block' : viewingResult.mode === 'review' ? 'review' : 'practice', viewingResult.questions.length === 15 ? viewingResult.questions[0]?.aptitudeId : undefined, viewingResult.mode === 'review' ? viewingResult.questions : undefined)} />}

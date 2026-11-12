@@ -1,4 +1,9 @@
 import type { Question } from '../data/questions'
+import { type Note, readNotes, writeNotes } from './notes'
+
+// La API de apuntes también se expone desde este módulo para que el flujo de
+// copia de seguridad (exportar/importar) use una única entrada de almacenamiento.
+export { readNotes, writeNotes }
 
 export interface ExamResult {
   id: string
@@ -72,13 +77,14 @@ export function writePreferences(prefs: Preferences) {
   }
 }
 
-export function createBackup(history: ExamResult[], preferences: Preferences) {
+export function createBackup(history: ExamResult[], preferences: Preferences, notes: Note[] = readNotes()) {
   return {
     format: 'psicotm-backup',
     version: 1,
     exportedAt: new Date().toISOString(),
     history,
     preferences,
+    notes,
   }
 }
 
@@ -108,12 +114,28 @@ function isResult(value: unknown): value is ExamResult {
     && Number.isInteger(result.unanswered) && Number.isInteger(result.total)
 }
 
-export function parseBackup(file: unknown): { history: ExamResult[]; preferences: Preferences } {
+function isNote(value: unknown): value is Note {
+  if (!value || typeof value !== 'object') return false
+  const note = value as Partial<Note>
+  return typeof note.id === 'string'
+    && typeof note.title === 'string'
+    && typeof note.content === 'string'
+    && typeof note.createdAt === 'string'
+    && typeof note.updatedAt === 'string'
+}
+
+export function parseBackup(file: unknown): { history: ExamResult[]; preferences: Preferences; notes: Note[] } {
   if (!file || typeof file !== 'object') throw new Error('El archivo no tiene un formato válido.')
-  const backup = file as { format?: string; version?: number; history?: unknown; preferences?: unknown }
+  const backup = file as { format?: string; version?: number; history?: unknown; preferences?: unknown; notes?: unknown }
   if (backup.format !== 'psicotm-backup' || backup.version !== 1) throw new Error('El archivo no es una copia de seguridad compatible de PSICOTÉCNICOS TM.')
   if (!Array.isArray(backup.history) || !backup.history.every(isResult)) throw new Error('La copia contiene resultados incompletos o dañados.')
   const raw = (backup.preferences && typeof backup.preferences === 'object' ? backup.preferences : {}) as Partial<Preferences>
+
+  let notes: Note[] = []
+  if (Array.isArray(backup.notes)) {
+    notes = (backup.notes as unknown[]).filter(isNote).slice(0, 200)
+  }
+
   return {
     history: (backup.history as ExamResult[]).slice(0, 50),
     preferences: {
@@ -121,5 +143,6 @@ export function parseBackup(file: unknown): { history: ExamResult[]; preferences
       blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw.blockMinutes)) ? Number(raw.blockMinutes) : 7,
       memorySeconds: [30, 45, 60, 90].includes(Number(raw.memorySeconds)) ? Number(raw.memorySeconds) : 45,
     },
+    notes,
   }
 }
