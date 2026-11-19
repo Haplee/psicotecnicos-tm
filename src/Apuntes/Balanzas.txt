@@ -1,0 +1,16 @@
+Balanzas
+
+Peso: Lo que pesa cada objeto 
+Distancia: A la distancia que se encuentra el peso del punto de apollo 
+
+Regla: Cuanto mas pesa algo mas cerca del punto de apollo debe colocarse para encontrar el equilibrio 
+
+Formula:
+
+P= Peso
+D= Distancia
+P1 x D1 = P2 x D2
+
+Para sacar la incognita es realizar una regla de 3, es decir multiplicar el peso y distancia que conocemos y dividirlo para obtener la incógnita:
+
+P1 x D1 / P2 = D2

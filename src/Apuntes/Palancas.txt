@@ -1,0 +1,5 @@
+Palancas
+
+1º Grado: Las palancas de primer grado consiste en que la fuerza esta en un extremo, el punto de apollo esta en el centro y la resistencia esta en el otro extremo
+2º Grado: Las palancas de segundo grado consiste en que la fuerza se aplica en un extremo, la resistencia esta en el centro y el punto de apollo esta en el otro extremo
+3º Grado: Las palancas de tercer grado consiste en que la fuera se aplica en el centro, el punto de apollo esta en un extremo y la resistencia esta en el otro extremo

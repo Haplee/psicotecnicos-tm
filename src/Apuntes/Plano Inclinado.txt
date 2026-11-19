@@ -1,0 +1,12 @@
+Plano Inclinado
+
+El concepto principal es subir una carga por una rampa cuesta menos que levantarla de forma vertical, a cambio se recorre mayor distancia 
+
+Cuanto menos inclinada la pendiente cuesta menos fuerza, pero se realiza un recorrido mayor
+
+Formulas
+F es la fuerza; L la longitud; P es el peso y H es la altura 
+	F x L = P x H
+	F = P x H / L
+
+(No confundir la longitud [L] con la altura [H] ni con la base horizontal en un triangulo, la rampa es la hipotenusa)

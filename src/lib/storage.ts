@@ -25,6 +25,7 @@ export interface Preferences {
   theme: 'dark' | 'light'
   blockMinutes: number
   memorySeconds: number
+  sidebarCollapsed: boolean
 }
 
 const HISTORY_KEY = 'psicotm.history.v1'
@@ -57,15 +58,16 @@ export function writeHistory(history: ExamResult[]) {
 export function readPreferences(): Preferences {
   try {
     const value = localStorage.getItem(PREFS_KEY)
-    if (!value) return { theme: 'dark', blockMinutes: 7, memorySeconds: 45 }
+    if (!value) return { theme: 'dark', blockMinutes: 7, memorySeconds: 45, sidebarCollapsed: false }
     const raw = JSON.parse(value) as Partial<Preferences>
     return {
       theme: raw.theme === 'light' ? 'light' : 'dark',
       blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw.blockMinutes)) ? Number(raw.blockMinutes) : 7,
       memorySeconds: [30, 45, 60, 90].includes(Number(raw.memorySeconds)) ? Number(raw.memorySeconds) : 45,
+      sidebarCollapsed: raw.sidebarCollapsed === true,
     }
   } catch {
-    return { theme: 'dark', blockMinutes: 7, memorySeconds: 45 }
+    return { theme: 'dark', blockMinutes: 7, memorySeconds: 45, sidebarCollapsed: false }
   }
 }
 
@@ -142,6 +144,7 @@ export function parseBackup(file: unknown): { history: ExamResult[]; preferences
       theme: raw.theme === 'light' ? 'light' : 'dark',
       blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw.blockMinutes)) ? Number(raw.blockMinutes) : 7,
       memorySeconds: [30, 45, 60, 90].includes(Number(raw.memorySeconds)) ? Number(raw.memorySeconds) : 45,
+      sidebarCollapsed: raw.sidebarCollapsed === true,
     },
     notes,
   }

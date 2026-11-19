@@ -1,0 +1,13 @@
+Péndulo 
+
+Un peso colocado de un hilo que oscula de un lado a otro
+
+La velocidad maxima se alcanza en el punto mas bajo (en el centro de la trayectoria) y la energía potencial maxima esta en los extremos donde se detiene un instante.
+
+Factores:
+
+	Longitud del hilo: A mayor longitud, mas tarda en completar una oscilación 
+	Masa del peso: En un péndulo ideal sin rozamiento, el peso colgado no cambia el tiempo de oscilación
+
+	(Que el péndulo tenga mas masa no significa que oscile mas rápido o mas lento, eso es el hilo, por lo que siempre hay que fijarse)
+

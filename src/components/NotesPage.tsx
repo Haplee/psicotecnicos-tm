@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { 
   FileText, Plus, Download, Trash2, Search, Save, Clock, 
-  ChevronLeft, ChevronRight 
+  ChevronLeft, ChevronRight, Upload, AlertCircle, CheckCircle2
 } from 'lucide-react'
 import { 
   readNotes, createNote, updateNote, deleteNote, initializeNotes, type Note 
@@ -16,7 +16,9 @@ export function NotesPage() {
   const [search, setSearch] = useState('')
   const [sidebarOpen, setSidebarOpen] = useState(true)
   const [saveStatus, setSaveStatus] = useState<'saved' | 'saving' | 'unsaved'>('saved')
+  const [uploadMessage, setUploadMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null)
   const saveTimeoutRef = useRef<number | undefined>(undefined)
+  const fileInputRef = useRef<HTMLInputElement>(null)
 
   useEffect(() => {
     initializeNotes()
@@ -63,6 +65,65 @@ export function NotesPage() {
     const remaining = readNotes()
     setNotes(remaining)
     setActiveId(remaining[0]?.id ?? null)
+  }
+
+  const handleFileUpload = async (file: File) => {
+    const supportedTypes = ['text/plain', 'text/markdown', 'application/pdf']
+    const supportedExtensions = ['.txt', '.md', '.pdf']
+    const fileExt = '.' + file.name.split('.').pop()?.toLowerCase()
+    
+    if (!supportedTypes.includes(file.type) && !supportedExtensions.includes(fileExt)) {
+      setUploadMessage({ type: 'error', text: `Formato no soportado: ${file.name}. Use .txt, .md o .pdf` })
+      setTimeout(() => setUploadMessage(null), 4000)
+      return
+    }
+
+    try {
+      let content = ''
+      
+      if (file.type === 'application/pdf' || fileExt === '.pdf') {
+        // PDF reading would require PDF.js - for now show a helpful message
+        setUploadMessage({ 
+          type: 'error', 
+          text: 'Los archivos PDF requieren procesamiento adicional. Por ahora, copie el texto y péguelo en un nuevo apunte.' 
+        })
+        setTimeout(() => setUploadMessage(null), 6000)
+        return
+      }
+      
+      // For text files (.txt, .md)
+      content = await file.text()
+      
+      if (!content.trim()) {
+        setUploadMessage({ type: 'error', text: 'El archivo está vacío.' })
+        setTimeout(() => setUploadMessage(null), 3000)
+        return
+      }
+
+      // Create note with filename as title (without extension)
+      const title = file.name.replace(/\.[^/.]+$/, '')
+      const newNote = createNote({ title, content })
+      setNotes(readNotes())
+      setActiveId(newNote.id)
+      setSearch('')
+      setUploadMessage({ type: 'success', text: `Apunte "${title}" creado correctamente` })
+      setTimeout(() => setUploadMessage(null), 3000)
+    } catch (error) {
+      setUploadMessage({ type: 'error', text: 'Error al leer el archivo.' })
+      setTimeout(() => setUploadMessage(null), 3000)
+    }
+  }
+
+  const triggerFileInput = () => {
+    fileInputRef.current?.click()
+  }
+
+  const onFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0]
+    if (file) {
+      handleFileUpload(file)
+      e.target.value = '' // Reset to allow same file re-upload
+    }
   }
 
   const handleDownload = () => {
@@ -131,27 +192,79 @@ export function NotesPage() {
       <div style={{ flex: 1, display: 'flex', overflow: 'hidden' }}>
         <aside style={sidebarStyle} className="notes-sidebar" role="complementary" aria-label="Lista de apuntes">
           <div style={{ padding: '0.75rem', borderBottom: '1px solid var(--border)', display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-            <button 
-              onClick={handleCreate}
-              style={{ 
-                display: 'flex', 
-                alignItems: 'center', 
-                gap: '0.5rem', 
+            <div style={{ display: 'flex', gap: '0.5rem' }}>
+              <button 
+                onClick={handleCreate}
+                style={{ 
+                  flex: 1,
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  gap: '0.5rem', 
+                  padding: '0.5rem 0.75rem', 
+                  borderRadius: '0.5rem', 
+                  background: wineRgba(0.1), 
+                  color: 'var(--wine)', 
+                  fontWeight: '500',
+                  border: 'none',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s',
+                }}
+                onMouseEnter={e => e.currentTarget.style.background = wineRgba(0.2)}
+                onMouseLeave={e => e.currentTarget.style.background = wineRgba(0.1)}
+                aria-label="Nuevo apunte"
+              >
+                <Plus size={18} style={{ flexShrink: 0 }} /> <span style={{ display: sidebarOpen ? 'inline' : 'none' }}>Nuevo</span>
+              </button>
+              <button 
+                onClick={triggerFileInput}
+                style={{ 
+                  flex: 1,
+                  display: 'flex', 
+                  alignItems: 'center', 
+                  justifyContent: 'center',
+                  gap: '0.5rem', 
+                  padding: '0.5rem 0.75rem', 
+                  borderRadius: '0.5rem', 
+                  background: 'var(--surface-2)', 
+                  color: 'var(--text)', 
+                  fontWeight: '500',
+                  border: '1px solid var(--border)',
+                  cursor: 'pointer',
+                  transition: 'background 0.2s, border-color 0.2s',
+                }}
+                onMouseEnter={e => { e.currentTarget.style.background = 'var(--surface-hover)'; e.currentTarget.style.borderColor = 'var(--border-strong)' }}
+                onMouseLeave={e => { e.currentTarget.style.background = 'var(--surface-2)'; e.currentTarget.style.borderColor = 'var(--border)' }}
+                aria-label="Subir archivo"
+                title="Subir .txt, .md o .pdf"
+              >
+                <Upload size={18} style={{ flexShrink: 0 }} /> <span style={{ display: sidebarOpen ? 'inline' : 'none' }}>Subir</span>
+              </button>
+            </div>
+            <input
+              type="file"
+              ref={fileInputRef}
+              onChange={onFileChange}
+              accept=".txt,.md,.pdf"
+              style={{ display: 'none' }}
+              aria-label="Seleccionar archivo para subir"
+            />
+            {uploadMessage && (
+              <div style={{ 
                 padding: '0.5rem 0.75rem', 
                 borderRadius: '0.5rem', 
-                background: wineRgba(0.1), 
-                color: 'var(--wine)', 
-                fontWeight: '500',
-                border: 'none',
-                cursor: 'pointer',
-                transition: 'background 0.2s',
-              }}
-              onMouseEnter={e => e.currentTarget.style.background = wineRgba(0.2)}
-              onMouseLeave={e => e.currentTarget.style.background = wineRgba(0.1)}
-              aria-label="Nuevo apunte"
-            >
-              <Plus size={18} style={{ flexShrink: 0 }} /> <span style={{ display: sidebarOpen ? 'inline' : 'none' }}>Nuevo apunte</span>
-            </button>
+                fontSize: '0.75rem',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                background: uploadMessage.type === 'success' ? 'rgba(34, 197, 94, 0.15)' : 'rgba(220, 130, 141, 0.15)',
+                border: `1px solid ${uploadMessage.type === 'success' ? 'rgba(34, 197, 94, 0.3)' : 'rgba(220, 130, 141, 0.3)'}`,
+                color: uploadMessage.type === 'success' ? 'var(--good)' : 'var(--bad)',
+              }}>
+                {uploadMessage.type === 'success' ? <CheckCircle2 size={14} /> : <AlertCircle size={14} />}
+                <span>{uploadMessage.text}</span>
+              </div>
+            )}
             <div style={{ position: 'relative' }}>
               <Search style={{ position: 'absolute', left: '0.75rem', top: '50%', transform: 'translateY(-50%)', color: 'var(--muted)', width: 16, height: 16, flexShrink: 0 }} />
               <input

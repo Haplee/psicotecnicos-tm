@@ -1,0 +1,224 @@
+Razonamiento Espacial
+
+
+1. Encajar una figura en un hueco
+
+Truco: Buscar las líneas de unión y los colores que coinciden.
+
+	- Localizar una esquina o un vértice fácil de reconocer.
+	- Observar qué colores y piezas quedan a cada lado.
+	- Comparar el orden de los colores en las opciones.
+	- Girar mentalmente la opción para comprobar si encaja.
+
+	IMPORTANTE: No fijarse solamente en la silueta exterior. También tienen que coincidir las divisiones interiores.
+
+
+2. Desarrollos de cubos
+
+Truco: Localizar las caras opuestas.
+
+	- Escoger una cara como base.
+	- Imaginar que se levantan las caras que tiene alrededor.
+	- Comprobar cuáles quedan enfrentadas.
+	- Descartar los cubos que colocan juntas dos caras opuestas.
+	- Comprobar la orientación de los dibujos y símbolos.
+
+	IMPORTANTE: Dos caras opuestas nunca pueden tocarse cuando el cubo está montado.
+
+
+3. Desplegar una figura tridimensional
+
+Truco: Seguir las caras que comparten una arista.
+
+	- Identificar las caras principales del objeto.
+	- Localizar qué caras están unidas entre sí.
+	- Buscar esas mismas uniones en los desarrollos.
+	- Comprobar que los colores y las formas quedan en el mismo orden al plegar.
+
+	IMPORTANTE: No basta con que aparezcan los mismos colores. Tienen que quedar en las caras correspondientes.
+
+
+4. Vistas de una pieza desde otra dirección
+
+Truco: Mirar desde la dirección que indica la flecha.
+
+	- Seguir la dirección de la flecha.
+	- Imaginar que se mira la pieza desde ese punto.
+	- Las partes que están una detrás de otra pueden quedar superpuestas.
+	- Comparar las alturas y anchuras de las partes visibles.
+	- Comprobar qué bordes se ven y cuáles quedan ocultos.
+
+	IMPORTANTE: No confundir una línea que representa profundidad con un borde visible.
+
+
+5. Papel plegado y agujereado
+
+Truco: Reflejar los agujeros respecto a cada pliegue.
+
+	- Identificar las líneas por donde se ha doblado el papel.
+	- Localizar cada agujero o corte.
+	- Deshacer mentalmente el último pliegue.
+	- Colocar una copia simétrica del agujero al otro lado del pliegue.
+	- Repetir el proceso con los pliegues anteriores.
+	- Comprobar la cantidad, forma y posición de los agujeros.
+
+	IMPORTANTE: No basta con contar los agujeros. También tienen que estar colocados en las posiciones correctas.
+
+
+6. Completar una figura o silueta
+
+Truco: Utilizar los vértices y las inclinaciones del contorno.
+
+	- Localizar dónde empieza el hueco.
+	- Observar si tiene lados horizontales, verticales o inclinados.
+	- Buscar una opción con esos bordes complementarios.
+	- Girarla mentalmente y comprobar si encaja sin sobresalir.
+
+	IMPORTANTE: Si uno de los ángulos no coincide, la pieza no es correcta.
+
+
+7. Completar un puzle de varias piezas
+
+Truco: Comparar las entradas y salidas del contorno.
+
+	- Observar la forma exterior del hueco.
+	- Localizar las puntas, entradas y esquinas.
+	- Buscar la pieza que tenga el contorno complementario.
+	- Comprobar que encaja sin dejar espacios ni sobresalir.
+
+	IMPORTANTE: Primero comprobar la forma exterior y después las líneas interiores.
+
+
+8. Identificar una construcción de cubos idéntica
+
+Truco: Dividir la construcción en grupos y girarla mentalmente.
+
+	- Separar mentalmente la figura en parte superior, central e inferior.
+	- Observar los salientes y los huecos.
+	- Utilizar un saliente asimétrico como referencia.
+	- Girar mentalmente la construcción para compararla con las opciones.
+	- Comprobar que se mantiene la misma distribución de bloques.
+
+	IMPORTANTE: Una figura puede estar girada y seguir siendo la misma. Una figura reflejada como en un espejo no tiene por qué serlo.
+
+
+9. Contar cuántas veces se repite una figura
+
+Truco: Dividir la figura grande en piezas iguales y contar de forma ordenada.
+
+	- Identificar la forma exacta de la pieza pequeña.
+	- Buscar sus repeticiones dentro de la figura grande.
+	- Contar por filas, zonas o grupos.
+	- Marcar mentalmente cada pieza contada para no repetirla.
+	- Utilizar el área como comprobación cuando las figuras estén dibujadas a escala.
+
+	Fórmula para comprobar mediante áreas:
+
+	Número de piezas = Área total / Área de una pieza
+
+	IMPORTANTE: No contar dos veces las piezas que comparten vértices o bordes.
+
+
+10. Seguir un recorrido mediante coordenadas
+
+Truco: Leer las coordenadas siempre en el mismo orden.
+
+	- Identificar las columnas con letras.
+	- Identificar las filas con números.
+	- Cada punto se identifica con número y letra.
+
+	Ejemplos:
+	2A = fila 2, columna A.
+	3B = fila 3, columna B.
+	3C = fila 3, columna C.
+
+	- Seguir cada vértice del recorrido y anotar las coordenadas en orden.
+	- Comparar la secuencia completa con las opciones.
+
+	IMPORTANTE: El recorrido puede leerse desde cualquiera de sus extremos. Comprobar la secuencia completa, no solamente el punto de inicio.
+
+
+11. Sumar construcciones de cubos
+
+Truco: Comparar las columnas de la figura inicial con las de la figura final.
+
+	- Localizar las columnas de la figura inicial.
+	- Contar la altura de cada columna.
+	- Hacer lo mismo con la figura final.
+	- Calcular cuántos cubos faltan en cada columna.
+	- Comprobar cuál de las opciones tiene esa distribución.
+
+	Diferencia = Altura de la columna final - Altura de la columna inicial
+
+	IMPORTANTE: No contar solamente los cubos que se ven arriba. Puede haber cubos parcialmente ocultos.
+
+
+12. Identificar una figura con elementos superpuestos
+
+Truco: Comparar las posiciones relativas de sus elementos.
+
+	- Localizar el elemento más grande.
+	- Identificar los elementos interiores o superpuestos.
+	- Observar qué elemento está a la izquierda, derecha, arriba o abajo de los demás.
+	- Comprobar las zonas de intersección y los dibujos interiores.
+	- Girar mentalmente la figura y comparar las relaciones entre los elementos.
+
+	IMPORTANTE: Girar no es reflejar. El orden de los elementos no debe invertirse.
+
+
+13. Plegar una figura geométrica
+
+Truco: Utilizar una cara como referencia y seguir las caras vecinas.
+
+	- Identificar la cara central o una cara fácil de reconocer.
+	- Imaginar que las caras de alrededor se levantan.
+	- Observar qué caras se tocan entre sí.
+	- Seguir el orden de los colores y símbolos alrededor del sólido.
+	- Descartar las opciones en las que los colores quedan invertidos o en caras opuestas.
+
+	IMPORTANTE: Comprobar qué caras pueden quedar juntas al plegar.
+
+
+14. Encontrar la salida de un laberinto
+
+Truco: Seguir la línea desde el inicio sin cambiar de trayectoria en los cruces.
+
+	- Escoger una entrada.
+	- Seguir la línea con la vista o con el dedo.
+	- Cuando haya un cruce, continuar por la misma línea.
+	- No cambiar de camino solamente porque otra línea atraviese la primera.
+	- Comprobar cuál de los recorridos llega a FIN.
+
+	IMPORTANTE: Un cruce de líneas no significa necesariamente que los caminos estén conectados.
+
+
+15. Plegar una figura compuesta por triángulos
+
+Truco: Identificar una cara y seguir las caras que tiene alrededor.
+
+	- Escoger uno de los triángulos como referencia.
+	- Identificar los triángulos que comparten sus lados.
+	- Imaginar que se levantan y se pliegan las caras.
+	- Comprobar qué triángulos terminan juntos.
+	- Comparar la distribución de las zonas sombreadas con las opciones.
+
+	IMPORTANTE: No confundir una figura girada con una reflejada como en un espejo.
+
+
+RESUMEN DE TRUCOS
+
+	Encajar figuras: Seguir colores, vértices y contorno.
+	Cubos desplegados: Encontrar las caras opuestas.
+	Desplegar sólidos: Seguir las caras adyacentes.
+	Vistas: Mirar desde la dirección de la flecha.
+	Papel doblado: Reflejar cada agujero al desdoblar.
+	Completar siluetas: Hacer coincidir los bordes.
+	Puzles: Comparar salientes y entrantes.
+	Construcciones de cubos: Girar, no reflejar.
+	Repetición de figuras: Dividir y contar piezas iguales.
+	Recorridos: Leer coordenadas.
+	Suma de cubos: Comparar alturas por columnas.
+	Figuras superpuestas: Comparar posiciones relativas.
+	Plegados: Usar una cara como referencia.
+	Laberintos: Seguir la línea sin cambiar en los cruces.
+	Triángulos plegados: Seguir la relación entre caras.

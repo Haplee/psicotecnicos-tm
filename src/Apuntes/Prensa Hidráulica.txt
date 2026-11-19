@@ -1,0 +1,22 @@
+Prensa Hidráulica
+
+Émbolo Pequeño: Es donde se aplica la fuerza.
+Émbolo Grande: Es donde se consigue una fuerza mayor para levantar la carga.
+
+Fórmula
+	- Esta relación es muy importante:
+
+	Presión = Fuerza / Superficie
+
+	- Como la presión se transmite por igual:
+
+	F1 = Fuerza aplicada en el émbolo pequeño.
+	F2 = Fuerza que se obtiene en el émbolo grande.
+	A1 = Superficie del émbolo pequeño.
+	A2 = Superficie del émbolo grande.
+
+	F1 / A1 = F2 / A2
+
+	- Para calcular la fuerza del émbolo grande:
+
+	F2 = (F1 x A2) / A1

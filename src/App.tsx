@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState, type ReactNode, type CSSProperties } from 'react'
 import {
   Activity, ArrowDownToLine, ArrowLeft, BookOpen, Brain, Calculator, Check,
-  CheckCircle2, ChevronDown, CircleHelp, ClipboardList, Clock3, Cog, Download, FileJson,
+  CheckCircle2, ChevronDown, ChevronLeft, ChevronRight, CircleHelp, ClipboardList, Clock3, Cog, Download, FileJson,
   FileText, History, Info, LayoutDashboard, ListChecks, Menu, Moon, MoreHorizontal,
   Play, Printer, RotateCcw, ScanEye, Settings, Shapes, ShieldCheck, Sun, Target, Timer,
   Trophy, Upload, X, XCircle, Zap, Box as BoxIcon,
@@ -59,6 +59,7 @@ function App() {
   const [session, setSession] = useState<Session | null>(null)
   const [viewingResult, setViewingResult] = useState<ExamResult | null>(null)
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(() => readPreferences().sidebarCollapsed)
   const [selectedAptitude, setSelectedAptitude] = useState<AptitudeId>('verbal')
   const [importMessage, setImportMessage] = useState('')
   const [confirmReset, setConfirmReset] = useState(false)
@@ -69,6 +70,9 @@ function App() {
   useEffect(() => writeHistory(history), [history])
   useEffect(() => writePreferences(preferences), [preferences])
   useEffect(() => { document.documentElement.dataset.theme = preferences.theme }, [preferences.theme])
+  useEffect(() => {
+    setPreferences(prev => ({ ...prev, sidebarCollapsed }))
+  }, [sidebarCollapsed])
 
   const finishExam = useCallback(() => {
     const active = sessionRef.current
@@ -222,11 +226,14 @@ function App() {
   return (
     <div className="app-shell">
       {page !== 'exam' && <>
-        <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''}`}>
+        <aside className={`sidebar ${sidebarOpen ? 'sidebar-open' : ''} ${sidebarCollapsed ? 'collapsed' : ''}`}>
           <div className="brand-lockup">
             <div className="brand-mark">TM</div>
             <div className="brand-copy"><strong>PSICOTÉCNICOS</strong><span>TROPA Y MARINERÍA</span></div>
             <button className="icon-button sidebar-close" onClick={() => setSidebarOpen(false)} aria-label="Cerrar menú"><X size={18} /></button>
+            <button className="icon-button sidebar-toggle" onClick={() => setSidebarCollapsed(!sidebarCollapsed)} aria-label={sidebarCollapsed ? 'Expandir barra lateral' : 'Colapsar barra lateral'} title={sidebarCollapsed ? 'Expandir barra lateral' : 'Colapsar barra lateral'}>
+              {sidebarCollapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+            </button>
           </div>
           <div className="sidebar-label">PLATAFORMA</div>
           <nav className="side-nav" aria-label="Navegación principal">
@@ -243,7 +250,7 @@ function App() {
         {sidebarOpen && <button className="mobile-scrim" aria-label="Cerrar menú" onClick={() => setSidebarOpen(false)} />}
       </>}
 
-      <main className={`main-area ${page === 'exam' ? 'exam-area' : ''}`}>
+      <main className={`main-area ${page === 'exam' ? 'exam-area' : ''} ${sidebarCollapsed ? 'sidebar-collapsed' : ''}`}>
         {page !== 'exam' && <header className="topbar">
           <div className="topbar-left">
             <button className="icon-button mobile-menu" onClick={() => setSidebarOpen(true)} aria-label="Abrir menú"><Menu size={20} /></button>
@@ -261,7 +268,7 @@ function App() {
         {page === 'history' && <HistoryPage history={history} onOpen={openResult} onClear={() => { if (window.confirm('¿Eliminar todo el historial guardado en este dispositivo?')) setHistory([]) }} />}
         {page === 'notes' && <NotesPage />}
         {page === 'mistakes' && <MistakesPage questions={failedQuestions} onStart={() => startSession('review', undefined, failedQuestions)} onTraining={(id) => startSession('review', undefined, failedQuestions.filter((question) => question.aptitudeId === id))} />}
-        {page === 'settings' && <SettingsPage preferences={preferences} setPreferences={setPreferences} historyCount={history.length} onExport={exportBackup} onImport={importBackup} importMessage={importMessage} confirmReset={confirmReset} setConfirmReset={setConfirmReset} onReset={() => { setHistory([]); setPreferences({ theme: 'dark', blockMinutes: 7, memorySeconds: 45 }); setConfirmReset(false); setImportMessage('Datos locales reiniciados.') }} />}
+        {page === 'settings' && <SettingsPage preferences={preferences} setPreferences={setPreferences} historyCount={history.length} onExport={exportBackup} onImport={importBackup} importMessage={importMessage} confirmReset={confirmReset} setConfirmReset={setConfirmReset} onReset={() => { setHistory([]); setPreferences({ theme: 'dark', blockMinutes: 7, memorySeconds: 45, sidebarCollapsed: false }); setConfirmReset(false); setImportMessage('Datos locales reiniciados.') }} />}
         {page === 'results' && viewingResult && <ResultsPage result={viewingResult} onBack={() => go('history')} onPrint={() => window.print()} onRetry={() => startSession(viewingResult.mode === 'full' ? 'full' : viewingResult.mode === 'block' ? 'block' : viewingResult.mode === 'review' ? 'review' : 'practice', viewingResult.questions.length === 15 ? viewingResult.questions[0]?.aptitudeId : undefined, viewingResult.mode === 'review' ? viewingResult.questions : undefined)} />}
         {page === 'results' && !viewingResult && <EmptyState title="Todavía no hay resultados" description="Completa un entrenamiento o simulacro para ver aquí tu corrección." action="Ir a entrenamiento" onAction={() => go('training')} />}
         <footer className="app-footer"><span>PSICOTÉCNICOS TM</span><span>Herramienta de entrenamiento independiente · No oficial</span></footer>

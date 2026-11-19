@@ -1,0 +1,24 @@
+Engranajes
+
+R1: Sentido del Giro
+	Si A se mueve en sentido horario, B se moverá en sentido contrario y C en sentido horario.
+
+	A ->; B <-; C ->
+
+R2: Número de dientes y velocidad
+	Un engranaje con muchos dientes gira más despacio y uno con pocos dientes gira más rápido.
+
+	- Para saber cuántas vueltas realiza el engranaje pequeño cuando el grande da una vuelta:
+
+	Vueltas = Engranaje grande / Engranaje pequeño
+
+	(E.G. / E.P., es decir, número de dientes del engranaje grande dividido entre el número de dientes del pequeño).
+
+	- Para calcular la velocidad a la que gira otro engranaje:
+
+	V = Velocidad de giro.
+	D = Número de dientes.
+
+	V2 = (V1 x D1) / D2
+
+	Se multiplica V1 x D1 y el resultado se divide entre D2.
