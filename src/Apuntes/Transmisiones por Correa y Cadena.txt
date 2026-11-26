@@ -1,0 +1,18 @@
+Transmisiones por Correa y Cadena
+
+R1: Sentido del Giro
+	- Correa abierta o cadena sin cruce: Las dos ruedas giran en el MISMO sentido.
+	  A ->; B ->
+	- Correa cruzada: Las dos ruedas giran en SENTIDO CONTRARIO.
+	  A ->; B <-
+
+R2: Tamaño y velocidad
+	- La rueda grande gira más despacio y la pequeña gira más rápido (igual que en los engranajes).
+
+Fórmula:
+V = Velocidad de giro
+D = Diámetro o número de dientes
+
+V2 = (V1 x D1) / D2
+
+IMPORTANTE: No confundir engranajes en contacto (que siempre invierten el giro) con una cadena o correa abierta (que mantiene el mismo giro).

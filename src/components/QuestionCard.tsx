@@ -13,8 +13,32 @@ interface Props {
 export function QuestionCard({ question, index, value, onChange, showResult = false }: Props) {
   const letters = ['A', 'B', 'C', 'D']
   const isCorrect = value === question.answer
+
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (showResult) return
+    const key = event.key.toUpperCase()
+    const keyMap: Record<string, number> = {
+      '1': 0,
+      '2': 1,
+      '3': 2,
+      '4': 3,
+      A: 0,
+      B: 1,
+      C: 2,
+      D: 3,
+    }
+    if (key in keyMap) {
+      event.preventDefault()
+      onChange(keyMap[key])
+    }
+  }
+
   return (
-    <article className={`question-card ${showResult ? (isCorrect ? 'question-correct' : value === null ? 'question-unanswered' : 'question-incorrect') : ''}`} id={`question-${question.id}`}>
+    <article
+      className={`question-card ${showResult ? (isCorrect ? 'question-correct' : value === null ? 'question-unanswered' : 'question-incorrect') : ''}`}
+      id={`question-${question.id}`}
+      onKeyDown={handleKeyDown}
+    >
       <div className="question-heading">
         <div className="question-number">{String(index).padStart(2, '0')}</div>
         <div className="question-meta"><span>{question.topic}</span><span className="dot-separator">·</span><span>{question.difficulty}</span></div>

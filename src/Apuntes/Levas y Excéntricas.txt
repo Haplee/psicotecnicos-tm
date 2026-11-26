@@ -1,0 +1,7 @@
+Levas y Excéntricas 
+
+Piezas con forma irregular o eje descentrado que, al girar, empujan a uno que lo acompaña (seguidor) y transforman giro en movimiento alternativo
+
+Regla: Las zonas más salientes (mayor radio desde el eje de giro) empujan mas alto al seguidor; las zonas mas pegadas al eje permiten que baje 
+
+(El eje de giro no siempre es el centro geometrico de la pieza; fijarse siempre donde esta marcado el eje)

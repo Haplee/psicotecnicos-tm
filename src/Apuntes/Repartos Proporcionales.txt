@@ -1,0 +1,13 @@
+Repartos Proporcionales
+
+Regla: Repartir un total en partes proporcionales a varios valores (edad, puntos, horas, etc.).
+
+1. Reparto directamente proporcional:
+	- Quien tiene más valor recibe más parte.
+	- Se suman las partes (o pesos) y se divide el total entre esa suma para hallar el valor de 1 unidad.
+	- Luego se multiplica por lo que corresponde a cada uno.
+
+2. Reparto inversamente proporcional:
+	- Quien tiene menos valor recibe más parte (por ejemplo, repartir un premio según menos faltas o menos tiempo empleado).
+
+IMPORTANTE: Comprobar siempre al final que la suma de todas las partes da exactamente el total a repartir.

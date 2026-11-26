@@ -1,0 +1,11 @@
+Cálculo Rápido y Operaciones
+
+Regla: Simplificar operaciones antes de multiplicar o dividir para ahorrar tiempo y evitar errores.
+
+Trucos:
+	- Multiplicar o dividir por 0,5 es lo mismo que dividir o multiplicar por 2.
+	- Multiplicar por 0,25 es dividir entre 4; dividir entre 0,25 es multiplicar por 4.
+	- En fracciones o divisiones grandes, simplificar arriba y abajo antes de operar.
+	- Respetar el orden de operaciones: paréntesis -> multiplicaciones y divisiones -> sumas y restas.
+
+IMPORTANTE: No sumar ni restar antes de resolver multiplicaciones o divisiones salvo que haya paréntesis.

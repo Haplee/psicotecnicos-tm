@@ -1,0 +1,11 @@
+Centro de Gravedad y Equilibrio
+
+El punto donde se considerar concentrado todo el peso de un cuerpo
+
+Regla: Un Objeto esta en equilibrio esta estable mientras la vertical trazada desde su centro de gravedad caiga dentro de su base de apoyo, si sale de la base vuelca
+
+Factores:
+	Base mas ancha y centro de gravedad mas bajo : Mayor estabilidad
+	Objetos simétricos y homogéneos: El centro de gravedad coincide con su centro geometrico
+
+(Un objeto con base estrecha o centro de gravedad alto vuelca con mucha menos inclinación, es mas fácil que vuelque)

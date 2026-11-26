@@ -1,0 +1,20 @@
+Porcentajes
+
+Regla: Un porcentaje es una parte de cada 100
+
+Formulas:
+	- Calcular el % de la cantidad:
+	Resultado = (cantidad x porcentaje)/100
+	
+	-Trucos rápidos: 
+	5% = la mitad de 10%
+	10% = dividir entre 10 (mover la coma)
+	20% = la quinta parte (dividir entre 5)
+	25% = la cuarta parte (dividir entre 4)
+	50% = la mitad (dividir entre 2)
+
+- Aumentos y descuentos:
+	  Aumento del x%: multiplicar por (1 + x/100) o sumar el % calculado.
+	  Descuento del x%: multiplicar por (1 - x/100) o restar el % calculado.
+
+IMPORTANTE: Un descuento del 20% seguido de un aumento del 20% NO devuelve la cantidad original, porque el segundo porcentaje se aplica sobre el nuevo valor.

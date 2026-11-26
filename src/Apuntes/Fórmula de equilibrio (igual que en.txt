@@ -1,0 +1,13 @@
+Fórmula de equilibrio (igual que en balanzas):
+F = Fuerza aplicada
+BF = Brazo de fuerza (distancia de la fuerza al apoyo)
+R = Resistencia o carga
+BR = Brazo de resistencia (distancia de la carga al apoyo)
+
+F x BF = R x BR
+
+Para calcular la fuerza necesaria:
+F = (R x BR) / BF
+
+
+

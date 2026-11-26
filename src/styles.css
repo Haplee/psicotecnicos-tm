@@ -267,5 +267,28 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
   body { background: #fff !important; color: #111 !important; }.sidebar, .topbar, .app-footer, .result-actions, .filter-tabs, .result-bottom-actions, .exam-topbar, .question-jump, .submit-panel, .exam-disclaimer { display: none !important; }.main-area { margin: 0 !important; }.page-content { max-width: none; padding: 0; }.result-hero, .metric-card, .question-card { break-inside: avoid; box-shadow: none; background: #fff !important; color: #111 !important; border-color: #ccc !important; }.question-card { margin-bottom: 8px; }.question-prompt, .answer-option, .answer-explanation p, .tip-box { color: #111 !important; }.answer-option { background: #fff !important; border-color: #ccc !important; }.answer-explanation, .tip-box { background: #f5f5f5 !important; }.question-heading { margin-bottom: 5px; }.score-ring { print-color-adjust: exact; }.result-metrics { grid-template-columns: repeat(4, 1fr); }.results-page { width: 100%; }
 }
 .mock-select-label { display: block; margin: 14px 0 6px; color: var(--muted); font-size: 9px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
-.mock-select { width: 100%; min-height: 37px; padding: 0 10px; border: 1px solid var(--border-strong); border-radius: 7px; background: var(--surface-2); color: var(--text); font-size: 10px; }
+.mock-select { width: 100%; min-height: 37px; padding: 0 10px; border: 1px solid var(--border-strong); border-radius: 7px; background: var(--surface-2); color: var(--text); font-size: 11px; }
 .answer-option input:focus-visible + .option-letter { outline: 2px solid var(--wine-soft); outline-offset: 3px; }
+
+.session-config-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin: 16px 0 18px; }
+.session-config-field { display: grid; gap: 5px; }
+.session-config-field label { color: var(--muted); font-size: 10px; font-weight: 650; }
+.session-config-field select { min-height: 36px; padding: 0 10px; border: 1px solid var(--border-strong); border-radius: 7px; background: var(--surface-2); color: var(--text); font-size: 11px; }
+.shuffle-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+.shuffle-pill { display: inline-flex; align-items: center; gap: 7px; padding: 6px 11px; border-radius: 999px; border: 1px solid var(--border-strong); background: var(--surface-2); color: var(--muted-2); font-size: 11px; cursor: pointer; }
+.shuffle-pill.active { border-color: var(--wine-soft); background: rgba(113, 52, 72, .2); color: var(--wine-pale); }
+.toggle-input { width: 38px; height: 22px; accent-color: var(--wine-soft); cursor: pointer; }
+
+.confirm-dialog { border: none; padding: 0; background: transparent; max-width: min(440px, calc(100vw - 32px)); width: 100%; margin: auto; color: var(--text); }
+.confirm-dialog::backdrop { background: rgba(0, 0, 0, .62); backdrop-filter: blur(4px); }
+.confirm-dialog-card { padding: 20px; border-radius: 13px; border: 1px solid var(--border-strong); background: var(--surface); box-shadow: var(--shadow); display: grid; gap: 14px; }
+.confirm-dialog-header { display: flex; align-items: center; gap: 10px; }
+.confirm-dialog-header h3 { margin: 0; font-size: 15px; flex: 1; }
+.confirm-dialog-icon { width: 34px; height: 34px; border-radius: 9px; display: grid; place-items: center; background: rgba(113, 52, 72, .18); color: var(--wine-soft); flex: 0 0 auto; }
+.confirm-dialog-icon.danger { background: rgba(220, 130, 141, .14); color: var(--bad); }
+.confirm-dialog-card p { margin: 0; color: var(--muted-2); font-size: 12px; line-height: 1.6; }
+.confirm-dialog-actions { display: flex; justify-content: flex-end; gap: 8px; margin-top: 4px; }
+
+@media (max-width: 620px) {
+  .session-config-grid { grid-template-columns: 1fr; }
+}

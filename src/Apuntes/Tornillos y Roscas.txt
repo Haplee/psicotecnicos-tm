@@ -1,0 +1,10 @@
+Tornillos y Roscas 
+
+Convierte un movimiento circular en un desplazamiento lineal
+
+Regla: por cada vuelta completa, el tornillo avanza una distancia igual al paso de rosca 
+
+Formula: 
+	Avanze = Nº de Vueltas x Paso de rosca 
+
+(Comprobar si se pide el avance total tras varias vueltas o solo el de una vuelta, fijarse en el sentido de giro horario/antihorario según la rosca)

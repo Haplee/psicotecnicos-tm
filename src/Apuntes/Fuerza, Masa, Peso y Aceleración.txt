@@ -1,0 +1,19 @@
+Fuerza, Masa, Peso y Aceleración
+
+Masa (m): Cantidad de materia de un cuerpo. Es siempre la misma en cualquier sitio (Tierra, Luna o espacio).
+Peso (P): Fuerza con la que la gravedad atrae a un cuerpo. Cambia si cambia la gravedad.
+
+Regla: Si la gravedad baja a la mitad, el peso baja a la mitad, pero la masa sigue igual.
+
+Fórmulas:
+F = Fuerza
+m = Masa
+a = Aceleración
+
+F = m x a
+a = F / m
+
+- Si duplicas la fuerza con la misma masa -> se duplica la aceleración.
+- Si duplicas la masa con la misma fuerza -> la aceleración baja a la mitad.
+
+IMPORTANTE: No confundir masa (kg) con peso (N). El peso siempre depende de la gravedad del lugar.

@@ -1,0 +1,25 @@
+Regla de Tres
+
+Regla: Sirve para hallar un dato desconocido a partir de otros tres relacionados.
+
+1. Regla de tres directa (a más -> más; a menos -> menos):
+	- Si una magnitud sube, la otra también sube (o si baja, baja).
+	- Ejemplo: más horas de trabajo -> más piezas hechas.
+
+	Fórmula:
+	A -> B
+	C -> X
+
+	X = (C x B) / A
+
+2. Regla de tres inversa (a más -> menos; a menos -> más):
+	- Si una magnitud sube, la otra baja (o al revés).
+	- Ejemplo: más trabajadores -> menos días para terminar el trabajo.
+
+	Fórmula:
+	A -> B
+	C -> X
+
+	X = (A x B) / C
+
+IMPORTANTE: Identificar primero si es directa o inversa antes de operar; invertir mal los términos cambia por completo el resultado.

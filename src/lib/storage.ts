@@ -1,14 +1,18 @@
-import type { Question } from '../data/questions'
+import type { AptitudeId, Question } from '../data/questions'
 import { type Note, readNotes, writeNotes } from './notes'
 
 // La API de apuntes también se expone desde este módulo para que el flujo de
 // copia de seguridad (exportar/importar) use una única entrada de almacenamiento.
 export { readNotes, writeNotes }
 
+export type QuestionSource = 'bank' | 'dynamic' | 'mixed'
+
 export interface ExamResult {
   id: string
   mode: 'practice' | 'block' | 'full' | 'review'
   title: string
+  aptitudeId?: AptitudeId
+  memoryBrief?: string
   startedAt: string
   completedAt: string
   durationSeconds: number
@@ -26,6 +30,19 @@ export interface Preferences {
   blockMinutes: number
   memorySeconds: number
   sidebarCollapsed: boolean
+  shuffleQuestions: boolean
+  shuffleOptions: boolean
+  questionSource: QuestionSource
+}
+
+export const defaultPreferences: Preferences = {
+  theme: 'dark',
+  blockMinutes: 7,
+  memorySeconds: 45,
+  sidebarCollapsed: false,
+  shuffleQuestions: true,
+  shuffleOptions: true,
+  questionSource: 'bank',
 }
 
 const HISTORY_KEY = 'psicotm.history.v1'
@@ -55,19 +72,28 @@ export function writeHistory(history: ExamResult[]) {
   }
 }
 
+function normalizePreferences(raw: Partial<Preferences> | undefined): Preferences {
+  const source: QuestionSource =
+    raw?.questionSource === 'dynamic' || raw?.questionSource === 'mixed' ? raw.questionSource : 'bank'
+  return {
+    theme: raw?.theme === 'light' ? 'light' : 'dark',
+    blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw?.blockMinutes)) ? Number(raw?.blockMinutes) : 7,
+    memorySeconds: [30, 45, 60, 90].includes(Number(raw?.memorySeconds)) ? Number(raw?.memorySeconds) : 45,
+    sidebarCollapsed: raw?.sidebarCollapsed === true,
+    shuffleQuestions: raw?.shuffleQuestions !== false,
+    shuffleOptions: raw?.shuffleOptions !== false,
+    questionSource: source,
+  }
+}
+
 export function readPreferences(): Preferences {
   try {
     const value = localStorage.getItem(PREFS_KEY)
-    if (!value) return { theme: 'dark', blockMinutes: 7, memorySeconds: 45, sidebarCollapsed: false }
+    if (!value) return { ...defaultPreferences }
     const raw = JSON.parse(value) as Partial<Preferences>
-    return {
-      theme: raw.theme === 'light' ? 'light' : 'dark',
-      blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw.blockMinutes)) ? Number(raw.blockMinutes) : 7,
-      memorySeconds: [30, 45, 60, 90].includes(Number(raw.memorySeconds)) ? Number(raw.memorySeconds) : 45,
-      sidebarCollapsed: raw.sidebarCollapsed === true,
-    }
+    return normalizePreferences(raw)
   } catch {
-    return { theme: 'dark', blockMinutes: 7, memorySeconds: 45, sidebarCollapsed: false }
+    return { ...defaultPreferences }
   }
 }
 
@@ -110,6 +136,8 @@ function isResult(value: unknown): value is ExamResult {
     && typeof result.title === 'string'
     && typeof result.completedAt === 'string'
     && typeof result.startedAt === 'string'
+    && (result.aptitudeId === undefined || typeof result.aptitudeId === 'string')
+    && (result.memoryBrief === undefined || typeof result.memoryBrief === 'string')
     && Array.isArray(result.questions) && result.questions.every(isQuestion)
     && !!result.answers && typeof result.answers === 'object'
     && Number.isInteger(result.correct) && Number.isInteger(result.incorrect)
@@ -140,12 +168,7 @@ export function parseBackup(file: unknown): { history: ExamResult[]; preferences
 
   return {
     history: (backup.history as ExamResult[]).slice(0, 50),
-    preferences: {
-      theme: raw.theme === 'light' ? 'light' : 'dark',
-      blockMinutes: [5, 6, 7, 8, 10, 12].includes(Number(raw.blockMinutes)) ? Number(raw.blockMinutes) : 7,
-      memorySeconds: [30, 45, 60, 90].includes(Number(raw.memorySeconds)) ? Number(raw.memorySeconds) : 45,
-      sidebarCollapsed: raw.sidebarCollapsed === true,
-    },
+    preferences: normalizePreferences(raw),
     notes,
   }
 }

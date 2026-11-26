@@ -1,0 +1,11 @@
+Series Numéricas
+
+Regla: Buscar qué cambia de un número al siguiente (suma, resta, multiplicación, división o una combinación alterna).
+
+Pasos rápidos:
+	- Comprobar primero si hay una suma o resta constante.
+	- Si no, probar a multiplicar o dividir por un número fijo.
+	- Si cambia cada paso (por ejemplo, +2, +4, +6 o x2, +1, x2, +1), anotar la diferencia entre términos.
+	- Si parece que hay dos series mezcladas, mirar los números en posiciones alternas (1º, 3º, 5º y 2º, 4º, 6º).
+
+IMPORTANTE: Comprobar siempre que la regla funcione en al menos tres saltos seguidos, no solo en el primero.

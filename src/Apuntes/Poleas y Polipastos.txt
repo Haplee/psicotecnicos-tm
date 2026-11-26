@@ -1,0 +1,15 @@
+Poleas y Polipastos
+
+Polea Fija: No reduce la fuerza que hay que hacer. Solo cambia la dirección en la que tiras (por ejemplo, tirar hacia abajo para subir un peso).
+Polea Móvil: Reduce el esfuerzo a la mitad, pero tienes que recoger el doble de cuerda.
+
+Regla: Cuantos más tramos de cuerda sujeten directamente la carga, menos fuerza necesitas hacer.
+
+Fórmula:
+F = Fuerza que hay que aplicar
+P = Peso o carga
+n = Número de tramos de cuerda que sostienen la carga (sin contar el tramo del que tiras si baja hacia ti)
+
+F = P / n
+
+IMPORTANTE: No contar el tramo de cuerda del que tiras hacia abajo en una polea fija; ese tramo no soporta peso, solo cambia la dirección.
